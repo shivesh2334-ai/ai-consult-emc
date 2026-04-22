@@ -4,6 +4,8 @@ This repository contains a Vite + React single-page app with a Vercel serverless
 
 ## Local development
 
+Use Node.js `20.19+`.
+
 1. Install dependencies:
    ```bash
    npm install
