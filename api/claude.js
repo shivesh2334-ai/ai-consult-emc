@@ -35,7 +35,8 @@ export default async function handler(req, res) {
     }
 
     return res.status(200).json({ text: data.content?.[0]?.text || "" });
-  } catch {
+  } catch (error) {
+    console.error("Anthropic API request failed:", error);
     return res.status(502).json({ error: "Unable to reach Anthropic API" });
   }
 }
