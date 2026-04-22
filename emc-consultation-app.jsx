@@ -85,18 +85,17 @@ const REGULATORY = [
 
 // ─── API CALL ────────────────────────────────────────────────────────────────
 async function callClaude(systemPrompt, userPrompt) {
-  const res = await fetch("https://api.anthropic.com/v1/messages", {
+  const res = await fetch("/api/claude", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
-      model: "claude-sonnet-4-20250514",
-      max_tokens: 1000,
-      system: systemPrompt,
-      messages: [{ role: "user", content: userPrompt }],
+      systemPrompt,
+      userPrompt,
     }),
   });
+  if (!res.ok) throw new Error("Claude API request failed");
   const data = await res.json();
-  return data.content?.[0]?.text || "";
+  return data.text || "";
 }
 
 // ─── STYLES ─────────────────────────────────────────────────────────────────
